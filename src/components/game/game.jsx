@@ -1,6 +1,8 @@
 import React from 'react';
 import Result from '../gameresult/gameresult';
 import Player from '../players/players';
+import './game.scss';
+
 class Game extends React.Component{
     constructor(){
         super();
@@ -22,8 +24,8 @@ class Game extends React.Component{
     updateInputs = (event) => {
         const moves = ['Rock','Paper','Scissors'];
         const opponentMove = moves[Math.floor(Math.random()*moves.length)];
-        this.setState({userInput:event.target.value,computerInput:opponentMove,showPlayers:false});
-        
+        this.setState({userInput:event.target.value,computerInput:opponentMove,showPlayers:false
+        });
     }
     
     checkWinner = () => {
@@ -139,20 +141,36 @@ class Game extends React.Component{
         return(
             
             <div>
-                <button value = "Rock" onClick = {this.updateInputs}> Rock </button>
-                <button value = "Paper" onClick = {this.updateInputs}> Paper </button>
-                <button value = "Scissors" onClick = {this.updateInputs}> Scissors </button>
-                {userInput?<button onClick = {this.checkWinner}> Go! </button>:null}
-                {showPlayers ? <Player 
-                userInput = {user} 
-                computerInput = {computer} 
-                />: null}
+                <div>
+
+                
+                <input type = "image"
+                style = {{backgroundColor:userInput === 'Rock' ? 'blue' : ''}}
+                src = {'https://cdn130.picsart.com/288074322023201.png?type=webp&to=min&r=640'} alt = 'Rock' className = "buttons" value = "Rock" onClick = {this.updateInputs}
+                />
+                     
+                <input type = "image"
+                style = {{backgroundColor:userInput === 'Paper' ? 'blue' : ''}}
+                src = {`http://assets.stickpng.com/images/580b585b2edbce24c47b2463.png`} alt = 'Paper' className = "buttons" value = "Paper" onClick = {this.updateInputs} />
+                <input type = "image"
+                style = {{backgroundColor:userInput === 'Scissors' ? 'blue' : ''}}
+                src = {`https://i.pinimg.com/originals/fa/d9/88/fad988caff49e215acccaf3f753a334f.png`} alt = 'Scissors' className = "buttons" value = "Scissors" onClick = {this.updateInputs} />
+                </div>
+                <div>
+                {userInput?<input type = "image" src = {`https://pbskids.org/plumlanding/i/common/playbutton.png`} alt = 'Go!' className = "buttons" value = "Scissors" onClick = {this.checkWinner} /> :null}
+                </div>
+
+                <div>
+                {showPlayers ? <Player userInput = {user} computerInput = {computer} />: null}
+                </div>
+
+                <div>
                 <Result 
                 wins = {wins} 
                 loss = {loss} 
                 draw = {draw}
                 />
-               
+               </div>
             </div>
             
         );
