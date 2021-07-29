@@ -1,7 +1,7 @@
 import React from 'react';
 import './players.scss';
 
-const Player = ({userInput,computerInput}) => {
+const Player = ({userInput,computerInput,player,computer}) => {
     const rock = 'https://cdn130.picsart.com/288074322023201.png?type=webp&to=min&r=640';
     const paper = 'http://assets.stickpng.com/images/580b585b2edbce24c47b2463.png';
     const scissors = 'https://i.pinimg.com/originals/fa/d9/88/fad988caff49e215acccaf3f753a334f.png';
@@ -30,9 +30,9 @@ const Player = ({userInput,computerInput}) => {
         
 
         <div>
-            <span className = 'players'> <img className = 'image' src = {playerURL} alt = {userInput}/> </span>
+            <span className = 'players'> <img style = {{backgroundColor:player}} className = 'image' src = {playerURL} alt = {userInput}/> </span>
             <span className = 'players'> <img className = 'image' src = {versus} alt = 'VS' /> </span>
-            <span className = 'players'> <img className = 'image' src = {computerURL} alt = {computerInput} /> </span>
+            <span className = 'players'> <img style = {{backgroundColor:computer}} className = 'image' src = {computerURL} alt = {computerInput} /> </span>
         </div>
     );
 }

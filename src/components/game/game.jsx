@@ -1,6 +1,7 @@
 import React from 'react';
 import Result from '../gameresult/gameresult';
 import Player from '../players/players';
+import Footer from '../footer/footer';
 import './game.scss';
 
 class Game extends React.Component{
@@ -17,15 +18,18 @@ class Game extends React.Component{
             userInput: '',
             user: '',
             computer: '',
-            showPlayers: false
+            showPlayers: false,
+            madeSelection:false,
+            playerBackground : '',
+            computerBackground: ''
         }
     }
 
     updateInputs = (event) => {
         const moves = ['Rock','Paper','Scissors'];
         const opponentMove = moves[Math.floor(Math.random()*moves.length)];
-        this.setState({userInput:event.target.value,computerInput:opponentMove,showPlayers:false
-        });
+        this.setState({userInput:event.target.value,computerInput:opponentMove,showPlayers:false,
+            madeSelection:true, playerBackground:'',computerBackground:''});
     }
     
     checkWinner = () => {
@@ -47,7 +51,8 @@ class Game extends React.Component{
                 wins:winCount,
                 loss:lossCount,
                 draw:drawCount,
-                user:userInput,computer:computerInput}
+                user:userInput,computer:computerInput, playerBackground:'springgreen', 
+                computerBackground: 'red'}
                 );
         }
         if(userInput === 'Scissors' && computerInput === 'Paper'){
@@ -60,7 +65,8 @@ class Game extends React.Component{
                 wins:winCount,
                 loss:lossCount,
                 draw:drawCount,
-                user:userInput,computer:computerInput}
+                user:userInput,computer:computerInput, playerBackground:'springgreen', 
+                computerBackground: 'red'}
                 );
         }
         if(userInput === 'Paper' && computerInput === 'Rock'){
@@ -73,7 +79,8 @@ class Game extends React.Component{
                 wins:winCount,
                 loss:lossCount,
                 draw:drawCount,
-                user:userInput,computer:computerInput}
+                user:userInput,computer:computerInput, playerBackground:'springgreen', 
+                computerBackground: 'red'}
                 );
         }
         //Losing cases:
@@ -87,7 +94,8 @@ class Game extends React.Component{
                 wins:winCount,
                 loss:lossCount,
                 draw:drawCount,
-                user:userInput,computer:computerInput}
+                user:userInput,computer:computerInput, playerBackground:'red', 
+                computerBackground: 'springgreen'}
                 );
         }
         if(userInput === 'Paper' && computerInput === 'Scissors'){
@@ -100,7 +108,8 @@ class Game extends React.Component{
                 wins:winCount,
                 loss:lossCount,
                 draw:drawCount,
-                user:userInput,computer:computerInput}
+                user:userInput,computer:computerInput, playerBackground:'red', 
+                computerBackground: 'springgreen'}
                 );
         }
         if(userInput === 'Scissors' && computerInput === 'Rock'){
@@ -113,7 +122,8 @@ class Game extends React.Component{
                 wins:winCount,
                 loss:lossCount,
                 draw:drawCount,
-                user:userInput,computer:computerInput}
+                user:userInput,computer:computerInput, playerBackground:'red', 
+                computerBackground: 'springgreen'}
                 );
         }
         //Draw:
@@ -128,16 +138,21 @@ class Game extends React.Component{
                 wins:winCount,
                 loss:lossCount,
                 draw:drawCount,
-                user:userInput,computer:computerInput}
+                user:userInput,computer:computerInput, playerBackground:'yellow', 
+                computerBackground: 'yellow'}
                 );
         }
-        this.setState({user:userInput,computer:computerInput});
+        this.setState({user:userInput,computer:computerInput,madeSelection:false});
         console.log(this.state.winCount + " " + this.state.lossCount + " " + this.state.drawCount);
         
     }
 
     render(){
-        const {userInput, user, computer, wins,loss,draw,showPlayers} = this.state;
+        const {userInput, user, computer, wins,loss,draw,showPlayers,madeSelection,
+        playerBackground, computerBackground} = this.state;
+        const rock = 'https://cdn130.picsart.com/288074322023201.png?type=webp&to=min&r=640';
+        const paper = 'http://assets.stickpng.com/images/580b585b2edbce24c47b2463.png';
+        const scissors = 'https://i.pinimg.com/originals/fa/d9/88/fad988caff49e215acccaf3f753a334f.png';
         return(
             
             <div>
@@ -157,11 +172,13 @@ class Game extends React.Component{
                 src = {`https://i.pinimg.com/originals/fa/d9/88/fad988caff49e215acccaf3f753a334f.png`} alt = 'Scissors' className = "buttons" value = "Scissors" onClick = {this.updateInputs} />
                 </div>
                 <div>
-                {userInput?<input type = "image" src = {`https://pbskids.org/plumlanding/i/common/playbutton.png`} alt = 'Go!' className = "buttons" value = "Scissors" onClick = {this.checkWinner} /> :null}
+                {madeSelection?<input type = "image" src = {`https://pbskids.org/plumlanding/i/common/playbutton.png`} alt = 'Go!' className = "buttons" value = "Scissors" onClick = {this.checkWinner} /> :null}
                 </div>
 
                 <div>
-                {showPlayers ? <Player userInput = {user} computerInput = {computer} />: null}
+                {showPlayers ? <Player userInput = {user} computerInput = {computer} 
+                player = {playerBackground} computer = {computerBackground}
+                />: null}
                 </div>
 
                 <div>
@@ -171,6 +188,7 @@ class Game extends React.Component{
                 draw = {draw}
                 />
                </div>
+               <Footer rock = {rock} paper = {paper} scissors = {scissors}/>
             </div>
             
         );
