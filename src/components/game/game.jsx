@@ -188,7 +188,10 @@ class Game extends React.Component{
                 draw = {draw}
                 />
                </div>
+               <div style = {showPlayers || madeSelection?{marginTop:70}:{marginTop:135}}> 
                <Footer rock = {rock} paper = {paper} scissors = {scissors}/>
+               </div>
+               
             </div>
             
         );

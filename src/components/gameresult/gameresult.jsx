@@ -5,9 +5,9 @@ const Result = ({userInput, computerInput,wins,loss,draw}) => {
         return(
             <>
            <div className = 'results'>  
-                <div> WINS: {wins}</div>
-                <div> LOSSES: {loss}</div>
-                <div> DRAWS: {draw}</div>
+                <div style = {{margin:20}}> WINS: {wins}</div>
+                <div style = {{margin:20}}> LOSSES: {loss}</div>
+                <div style = {{margin:20}}> DRAWS: {draw}</div>
            </div>
                 
             </>
